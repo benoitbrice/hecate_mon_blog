@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            <h1>MON BLOG</h1>
+            <div>
+                {% if not app.user %}
+                <a href="{{ path('app_register') }}">Inscription</a>
+                <a href="{{ path('app_login') }}">Authentification</a>
+                {% else %}
+                {{ app.user.email }}
+                <a href="{{ path('app_logout') }}">Deconnexion</a>
+                {% endif %}
+                <a href="{{ path('app_article_index') }}">Articles</a>
+                <a href="{{ path('app_author_index') }}">Auteurs</a>
+            </div>
+        </header>
+        {% block body %}{% endblock %}
+        <footer>
+            <ul>
+                <li><a href="{{ path('app_static_whois') }}">Qui sommes nous ?</a></li>
+                <li><a href="{{ path('app_static_cgv') }}">CGV</a></li>
+                <li><a href="{{ path('app_home') }}">Accueil</a></li>
+            </ul>
+        </footer>
+    </body>
+</html>
